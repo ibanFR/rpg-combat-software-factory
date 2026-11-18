@@ -27,6 +27,8 @@ Create a GitHub issue.
 
 Run `gh issue view <number> --comments`.
 
+GitHub shares one number space across issues and PRs, so a bare `#42` may be either: resolve with `gh pr view 42` and fall back to `gh issue view 42`.
+
 ## Wayfinding operations
 
 Used by `/wayfinder`. The **map** is a single issue with **child** issues as tickets.
