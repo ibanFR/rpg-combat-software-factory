@@ -11,7 +11,7 @@ If any of these files don't exist, **proceed silently**. Don't flag their absenc
 
 ## File structure
 
-This repo is single-context:
+This repo is single-context (illustrative layout; the ADR filenames are examples, not this repo's files):
 
 ```
 /
