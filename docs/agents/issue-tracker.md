@@ -17,7 +17,7 @@ In Claude Code cloud sessions, where `gh` can't write, use the matching GitHub M
 
 ## Pull requests as a triage surface
 
-**PRs as a request surface: no.** _(Set to `yes` if this repo treats external PRs as feature requests; `/triage` reads this flag.)_ When `yes`, run PRs through the same labels and states as issues with the `gh pr` equivalents (`view`/`diff`/`list`/`comment`/`edit`/`close`), and triage only PRs whose `authorAssociation` is `CONTRIBUTOR`, `FIRST_TIME_CONTRIBUTOR` or `NONE`.
+**PRs as a request surface: no.** _(Set to `yes` if this repo treats external PRs as feature requests; `/triage` reads this flag. Re-add the `gh pr` instructions from the `setup-matt-pocock-skills` GitHub template when switching it on.)_
 
 ## When a skill says "publish to the issue tracker"
 
