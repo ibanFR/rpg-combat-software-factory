@@ -19,5 +19,5 @@ fi
 echo "Installing gem dependencies..."
 bundle install
 
-echo "Serving site at http://localhost:4000 (Ctrl+C to stop)..."
+echo "Serving site at http://localhost:4000/rpg-combat-software-factory/ (Ctrl+C to stop)..."
 bundle exec jekyll serve --livereload "$@"

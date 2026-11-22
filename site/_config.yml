@@ -3,10 +3,13 @@ description: A TypeScript implementation of the RPG Combat kata, built by an age
 theme: just-the-docs
 
 url: https://ibanfr.github.io
+baseurl: /rpg-combat-software-factory
 repository: https://github.com/ibanFR/rpg-combat-software-factory
 
+# Note: just-the-docs renders aux_links hrefs verbatim (no relative_url filter),
+# so the Blog link must include the baseurl to resolve under project pages.
 aux_links:
-  Blog: /blog/
+  Blog: /rpg-combat-software-factory/blog/
   Iván Fernández: https://ibanfr.github.io/
   View on GitHub: https://github.com/ibanFR/rpg-combat-software-factory
 
