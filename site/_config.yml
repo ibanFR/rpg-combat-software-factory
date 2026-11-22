@@ -49,11 +49,10 @@ jekyll-archives:
     tag: /blog/tag/:name/
     category: /blog/category/:name/
 
+# Jekyll 4 merges this list with its default excludes (Gemfile, Gemfile.lock,
+# vendor/, node_modules/, ...), so only site-specific files go here.
 exclude:
   - start_local_server.sh
-  - Gemfile
-  - Gemfile.lock
-  - vendor/
 
 # Documentation sections are plain page directories under site/. Navigation is
 # built from each page's front matter (title / parent / grand_parent /
