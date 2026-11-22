@@ -757,3 +757,12 @@ documentarist_review_r3:
     not_checked: 'live external URLs (no network); research lines 291-634'
     review_cycle: 3
     escalation: 'not required'
+post_review_change:
+  date: '2026-11-22'
+  by: orchestrator
+  reason: 'Gap G9 closed after gh re-authentication (gh label list, gh issue list, rules API).'
+  edits:
+    - 'Line 85: labels now stated to exist on GitHub, with a few issues carrying needs-triage; still no automation.'
+    - "Current-state table: triage labels row state 'Exist on GitHub'; CI row says a ruleset on main requires only the action-pin check."
+    - 'Open questions: removed the labels and required-check question.'
+  note: 'Made after the round-3 APPROVED review; factual update only, not re-reviewed.'

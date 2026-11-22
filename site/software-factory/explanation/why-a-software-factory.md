@@ -82,7 +82,7 @@ Why keep a person at this gate? Kief Morris, on martinfowler.com, splits the wor
 
 Anthropic makes a related point. Agents can pause for human feedback at checkpoints. When an agent works alone, small errors can pile up. So checkpoints act as a safeguard. See [Anthropic's guidance on building agents](https://www.anthropic.com/engineering/building-effective-agents).
 
-The triage labels are meant to put this split on the issue tracker. That is design intent. The labels are documented in docs/agents/triage-labels.md. Whether they exist on GitHub is not checked. No automation reads them. So today the delegation decision is a convention, not a gate. We found no independent evidence that such labels improve results. Treat the design as a rationale to test.
+The triage labels are meant to put this split on the issue tracker. That is design intent. The labels are documented in docs/agents/triage-labels.md. All five exist on GitHub, and a few issues already carry `needs-triage`. No automation reads them. So today the delegation decision is a convention, not a gate. We found no independent evidence that such labels improve results. Treat the design as a rationale to test.
 
 ## Why checks and tests carry more weight
 
@@ -124,17 +124,16 @@ These limits are reasons to measure and review. They are not reasons to stop.
 |---|---|---|
 | AGENTS.md | Exists | Summary, scripts, and pointers. A playful opening rule shows whether an agent read it (our reading) |
 | docs/agents adapter files | Exists | Tracker, labels, and domain docs |
-| Triage labels | Documented convention | Not checked on GitHub. No automation reads them. Category labels are not mapped |
+| Triage labels | Exist on GitHub | Documented convention. No automation reads them. Category labels are not mapped |
 | `npm run checks` | Instructed, not enforced | No hook and no CI run. Probably fails today (not run) |
 | Project skills | None checked in; location not verified | The skills folder holds only a placeholder. Local and user-level setup was not inspected |
 | Glossary (CONTEXT.md) | Absent | Upstream may have renamed it; not verified |
-| CI workflows | Partial | Pin action versions and build the site. None runs tests, lint, or typecheck. Branch settings not checked |
+| CI workflows | Partial | Pin action versions and build the site. None runs tests, lint, or typecheck. A ruleset on main requires only the action-pin check |
 | Kata code | Not started | No src folder and no test files |
 | Story count | Unresolved | AGENTS.md says six. [user-stories.md]({{ site.repository }}/blob/main/user-stories.md) has five sections and 14 numbered rules |
 
 ## Open questions
 
-- Do the five triage labels exist on GitHub? Is the lock check really required on main?
 - Does `npm run checks` pass once the first story has tests?
 - Does a delegation label change outcomes? We found no independent evidence so far. The [project blog]({{ site.baseurl }}/blog/) is a place to test it.
 
