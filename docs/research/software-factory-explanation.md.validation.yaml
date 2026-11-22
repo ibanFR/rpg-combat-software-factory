@@ -1,0 +1,759 @@
+validation_report:
+  document: site/software-factory/explanation/why-a-software-factory.md
+  parent_edited: 'site/software-factory/explanation/sf-explanation.md (added has_children: true only)'
+  evidence_base: docs/research/software-factory-for-explanation-doc.md (APPROVED round 3)
+  method_note: 'Writer had no shell. Spelling, links and Flesch were checked by reading and by a token scan. The Jekyll build was verified by the orchestrator. Live external URLs were not requested. Prettier does not apply to site/.'
+  typesafe: 'not invoked; judgments local (no client in this session)'
+
+  classification:
+    type: explanation
+    confidence: high
+    signals:
+      positive:
+        [
+          'why/history/alternatives/trade-offs sections',
+          "'Where the term comes from', 'Trade-offs and limits', 'Why ...' headings",
+          'discursive prose with reasons',
+          "opinion marked as 'our reading'",
+        ]
+      negative_absent:
+        [
+          'no numbered procedures',
+          'no command walkthrough',
+          "no tutorial 'you should see' steps",
+          'no exhaustive command or label listing',
+        ]
+
+  type_purity:
+    estimate_percent: '83-90 (range; status table and further-reading list are the non-explanation blocks)'
+    threshold: 80
+    result: PASS
+
+  readability:
+    flesch_reading_ease_estimate: 'Orchestrator script measured 69.8 pre-fix (round 2). Post-fix: writer round-2 fixes measured 69.8 (unchanged); orchestrator then swapped six polysyllabic phrases (no meaning change) and re-measured 71.2 (1711 words, 183 sentences, 1.49 syllables/word; prose only, heuristic).'
+    target: '70-80'
+    result: 'NOT CONFIRMED - orchestrator to measure with a real Flesch tool'
+
+  spelling:
+    method: 'manual read plus token scan of non-dictionary words against /usr/share/dict (r1); no spell checker installed'
+    errors_found: 0
+    result: 'PASS (manual)'
+
+  style_consistency:
+    checked_against:
+      [
+        site/index.md,
+        site/software-factory/software-factory.md,
+        site/software-factory/reference/sf-reference.md,
+      ]
+    matches:
+      [
+        'front matter keys and order',
+        '# heading with {: .no_toc }',
+        'lead paragraph with {: .fs-6 .fw-300 }',
+        '## Table of Contents with {: .no_toc .text-delta } and {:toc}',
+        'Kramdown attribute lists intact',
+        'no emoji',
+        'no Mermaid',
+      ]
+    result: 'PASS (manual, estimated 100% of checked rules)'
+
+  links_checked:
+    internal_site:
+      - '{{ site.baseurl }}/software-factory/software-factory/ -> site/software-factory/software-factory.md (exists)'
+      - '{{ site.baseurl }}/software-factory/tutorial/sf-tutorial/ -> exists (skeleton)'
+      - '{{ site.baseurl }}/software-factory/how-to/sf-how-to/ -> exists (skeleton)'
+      - '{{ site.baseurl }}/software-factory/reference/sf-reference/ -> exists (skeleton)'
+      - '{{ site.baseurl }}/blog/ -> site/blog/index.md (exists)'
+      - '#current-state-what-exists-and-what-is-planned (in-page anchor, from heading text)'
+    repo_files:
+      - '{{ site.repository }}/blob/main/docs/adr/0001-jekyll-docs-site.md -> exists'
+      - '{{ site.repository }}/blob/main/user-stories.md -> exists'
+    external:
+      - 'https://simonwillison.net/2003/Aug/27/codeKata/ (research source row 28)'
+      - 'https://diataxis.fr/compass/ (row 18)'
+      - 'https://agents.md/ (row 8)'
+      - 'https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents (row 10)'
+      - 'https://www.martinfowler.com/articles/exploring-gen-ai/humans-and-agents.html (row 19)'
+      - 'https://newsletter.kentbeck.com/p/augmented-coding-beyond-the-vibes (row 21)'
+      - 'https://code.claude.com/docs/en/best-practices (row 12)'
+      - 'https://learn.microsoft.com/en-us/previous-versions/aa480032(v=msdn.10) (row 1)'
+      - 'https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview (row 9)'
+      - 'https://www.anthropic.com/engineering/building-effective-agents (row 11)'
+      - 'https://www.anthropic.com/research/AI-assistance-coding-skills (row 13)'
+      - 'https://academic.oup.com/book/52424 (row 5)'
+      - 'https://learn.microsoft.com/en-us/archive/blogs/stevecook/analogy-between-software-development-and-manufacturing (row 4)'
+      - 'https://dora.dev/insights/dora-2025-year-in-review/ (row 23)'
+      - 'https://arxiv.org/abs/2507.09089 (row 25; search metadata only, not fetched)'
+      - 'https://newsletter.kentbeck.com/p/augmented-coding-beyond-the-vibes (row 21, already listed)'
+    not_checked_live: 'External URLs were taken from the research source table and were not requested in this session (no network check). Mark as checked-by-source only.'
+    dropped_from_r2: 'Cusumano MIT DSpace record (row 7) is not linked; the OUP record (row 5) is used for the book.'
+    broken_links: 0 (by reading)
+    notes:
+      - "Orchestrator correction: Jekyll build (jekyll 4 + just-the-docs) emits pretty permalinks (/path/name/index.html), so the writer's .html links were broken. Changed to trailing-slash form matching site/index.md; all internal links verified against a local build."
+      - 'Research document not linked: it is untracked and would be a broken link on the published site.'
+
+  collapse_detection:
+    clean: true
+    checks:
+      tutorial_creep: "no 'why' detours inside a step sequence; none found (no steps)"
+      howto_bloat: 'no procedures; no teaching-before-task; none found'
+      reference_narrative: 'current-state table is a status list, not a reference; no opinion inside table entries beyond status text; none found'
+      explanation_task_drift: "no step lists or 'do this' instructions; none found"
+      hybrid_horror: 'single quadrant (explanation) with a status table and a link list; none found'
+    adjacent_content_over_20_percent: false
+    violations: []
+
+  diagram_findings: [] # no diagrams; Mermaid not enabled in site/_config.yml
+
+  claims_to_research_traceability:
+    - {
+        claim: 'Factory = agents, instructions, skills, workflows turning issues into tested reviewed code',
+        source: 'local site/software-factory/software-factory.md; research Local table',
+        finding: "Local Evidence row 'Factory definition'",
+      }
+    - {
+        claim: 'Bemer at GE credited with early proposal around 1968; reduce variation',
+        source: 'Cusumano (MIT working paper, snippet level)',
+        finding: 'F1.1 (hedged, Medium-Low); C1',
+        hedged: true,
+      }
+    - {
+        claim: 'Cusumano 1991 book is a classic study; cited as background only',
+        source: 'OUP record',
+        finding: 'F1.2 (bibliographic only)',
+      }
+    - {
+        claim: "'move from documentation to automation'; 'tended by drones'",
+        source: 'Greenfield 2004 Microsoft Learn',
+        finding: 'F1.3 (verbatim, High)',
+      }
+    - {
+        claim: "Vendors use 'software factory' for agent pipelines; no single definition",
+        source: 'search summaries',
+        finding: 'F1.4 (Medium), G3',
+      }
+    - {
+        claim: 'Carry-over table (2004 vs agent factory)',
+        source: 'synthesis',
+        finding: 'F1.5 (interpretation)',
+      }
+    - {
+        claim: 'AGENTS.md is a README for agents; nearest file wins; many tools read it',
+        source: 'agents.md',
+        finding: 'F2.1 (High)',
+      }
+    - {
+        claim: 'Context must be treated as a finite resource with diminishing marginal returns',
+        source: 'Anthropic context engineering',
+        finding: 'F2.3 (verbatim)',
+      }
+    - {
+        claim: 'Progressive disclosure: short description always visible, body loads on trigger',
+        source: 'Claude Agent Skills overview',
+        finding: 'F2.2 (High)',
+      }
+    - {
+        claim: 'Five triage roles; ready-for-agent / ready-for-human definitions',
+        source: 'mattpocock triage SKILL.md',
+        finding: 'F3.1 (High for definitions)',
+      }
+    - {
+        claim: 'AFK = away from keyboard',
+        source: 'none (our reading)',
+        finding: 'G4 (interpretation, labelled)',
+      }
+    - {
+        claim: 'Test for ready-for-agent: specified well enough to finish without judgment calls, outside access, or manual testing',
+        source: "our reading of the upstream ready-for-agent definition (SKILL.md, row 15). The wording's concepts also appear in aihero.dev (row 16, same author as mattpocock, not independent); not cited as a source",
+        finding: "F3.1 (interpretation, labelled 'our reading' in doc)",
+      }
+    - {
+        claim: 'Generator is deterministic; agent is not',
+        source: 'research F1.5 table (Mechanism row); F4.2',
+        finding: 'F1.5 / F4.2 (interpretation)',
+      }
+    - {
+        claim: 'Checkpoints as a safeguard; autonomy compounds errors',
+        source: 'Anthropic Building effective agents (row 11)',
+        finding: 'F3.2 (paraphrase)',
+      }
+    - {
+        claim: 'Steve Cook 2006: software still needs a craftsman',
+        source: 'Cook 2006 (row 4, fetched)',
+        finding: 'T5 (paraphrase)',
+      }
+    - {
+        claim: 'Morris: suggests improving the harness rather than fixing outputs by hand; review limits factory (our reading)',
+        source: "Morris (row 19); T3 (bottleneck is Morris; the 'limits the whole factory' extension is ours)",
+        finding: 'T3 / F3.2 (split attribution)',
+      }
+    - {
+        claim: 'Morris why/how loop; in/out/on the loop; on the loop = improve harness',
+        source: 'martinfowler.com Morris 2026',
+        finding: 'F3.2 (High)',
+      }
+    - {
+        claim: 'Human checkpoints; compounding errors',
+        source: 'Anthropic Building effective agents',
+        finding: 'F3.2 (paraphrase)',
+      }
+    - {
+        claim: "'that makes you the test suite'; looks done vs done",
+        source: 'Claude Code best practices',
+        finding: 'F4.1 (verbatim, High)',
+      }
+    - {
+        claim: 'Instructions vs hooks/CI; rule that keeps being missed belongs in a hook',
+        source: 'Claude Code best practices',
+        finding: 'F4.2 (paraphrase)',
+      }
+    - {
+        claim: "Agents cheat by 'disabling or deleting tests'",
+        source: 'Beck 2025',
+        finding: 'F4.3 (verbatim)',
+      }
+    - {
+        claim: 'AI raises throughput, can hurt stability when foundation weak; full report not read',
+        source: 'DORA year-in-review (fetched)',
+        finding: 'F4.4 (paraphrase; search-summary quotes NOT used)',
+      }
+    - {
+        claim: 'Dave Thomas posted a series of exercises called katas',
+        source: 'Willison 2003 (fetched)',
+        finding: "F5.2 (no 'coined' claim)",
+      }
+    - {
+        claim: 'Kata gives small domain; each story sized like an issue; no legacy/production',
+        source: 'local user-stories.md, site/index.md; interpretation',
+        finding: 'F5.2 analysis (interpretation)',
+      }
+    - {
+        claim: 'Diataxis explanation: discussion, reflection, context, alternatives; no steps',
+        source: 'diataxis.fr',
+        finding: 'F5.1 (High)',
+      }
+    - {
+        claim: 'Jekyll + just-the-docs chosen to match other projects',
+        source: 'docs/adr/0001-jekyll-docs-site.md',
+        finding: 'Local Evidence row ADR',
+      }
+    - {
+        claim: 'Deskilling: 52 mostly junior devs; no significant speed gain; 50% AI vs 67% hand-coding quiz; largest gap debugging; skills to check AI code may erode',
+        source: 'Anthropic AI assistance & coding skills 2026 (row 13)',
+        finding: 'T1 (Medium-High; speed-gain not significant recorded per T1; paraphrase)',
+      }
+    - {
+        claim: 'Perceived vs measured speed: slowed while believing sped up',
+        source: 'METR arXiv 2507.09089 (search metadata only)',
+        finding: "T2 (Medium; flagged 'read only through a search summary')",
+      }
+    - {
+        claim: 'Agents generate code faster than humans inspect it',
+        source: 'Morris',
+        finding: 'T3 (paraphrase)',
+      }
+    - {
+        claim: 'Metaphor: software still needs a craftsman; design work stays',
+        source: 'Cook 2006 MSDN blog (fetched)',
+        finding: 'T5 (Medium); Cockburn attribution NOT used',
+      }
+    - {
+        claim: 'Use skills only from trusted sources; treat like installing software',
+        source: 'Agent Skills docs',
+        finding: 'T6 (paraphrase)',
+      }
+    - { claim: 'Hooks/rules need upkeep', source: 'Claude Code docs', finding: 'T7 (paraphrase)' }
+    - {
+        claim: 'Making a component reusable is costly; reuse must be systematic',
+        source: 'Greenfield 2004',
+        finding: 'T7 (paraphrase)',
+      }
+    - {
+        claim: 'Repo facts: five triage labels documented; no automation reads them; npm run checks is instruction-only; no CI runs tests; no hook; no src/ or tests; no skills checked in; no CONTEXT.md; six vs 5/14 story count',
+        source: 'repo files',
+        finding: 'Local Evidence table; G9, G10, G11, G12',
+      }
+    - {
+        claim: 'npm run checks probably cannot pass today',
+        source: 'tool-default inference, not executed',
+        finding: 'H2 / G11 (flagged as inference in doc)',
+      }
+    - {
+        claim: 'Triage labels existence on GitHub',
+        source: 'none',
+        finding: 'G9 - stated as NOT verified in doc',
+      }
+    - {
+        claim: 'No independent evidence that delegation labels improve outcomes',
+        source: 'research search',
+        finding: 'G5 - stated in doc',
+      }
+    - {
+        claim: 'Diataxis author name',
+        source: 'not used in doc',
+        finding: '[18] unverified - name omitted',
+      }
+
+  quotes_used: # all short, attributed, under 15 words
+    - { text: 'move from documentation to automation', attribution: 'Greenfield 2004', words: 5 }
+    - { text: 'tended by drones', attribution: 'Greenfield 2004', words: 3 }
+    - {
+        text: 'must be treated as a finite resource with diminishing marginal returns',
+        attribution: 'Anthropic context engineering',
+        words: 12,
+      }
+    - { text: 'that makes you the test suite', attribution: 'Claude Code best practices', words: 6 }
+    - { text: 'disabling or deleting tests', attribution: 'Beck 2025', words: 4 }
+    - {
+        text: 'the pre-commit gate',
+        attribution: "AGENTS.md (repo, quoted as the repo's own wording)",
+        words: 3,
+      }
+  quotes_avoided:
+    [
+      "DORA 'amplifier' and 'increasing instability' (search summary only)",
+      'Cockburn attribution (second-hand)',
+      'RPG kata origin via SlideShare (non-trusted)',
+      "Beck 'superpower' (secondary summary)",
+      'Anthropic RCT verbatim sentence (paraphrased instead)',
+    ]
+
+  limitations_carried:
+    - {
+        id: G9,
+        text: 'Triage labels not verified on GitHub; branch protection and required-check status not checked',
+        where_in_doc: 'Triage section; Current state table; Open questions',
+      }
+    - {
+        id: G11,
+        text: 'npm run checks probably cannot pass today; inference, not run',
+        where_in_doc: 'Checks section; Current state table',
+      }
+    - {
+        id: G12,
+        text: 'Local and user-level config not inspected; skill location not verified',
+        where_in_doc: 'Current state table (Project skills row)',
+      }
+    - {
+        id: G13,
+        text: 'Cusumano 1989 IEEE Software citation unverified',
+        where_in_doc: 'not cited (omitted deliberately)',
+      }
+    - {
+        id: G1,
+        text: 'Cusumano and Bemer read only via snippets/bibliographic records',
+        where_in_doc: 'Where the term comes from section',
+      }
+    - {
+        id: G6,
+        text: 'DORA full report not read; year-in-review only',
+        where_in_doc: 'Checks section',
+      }
+    - {
+        id: G5,
+        text: 'No independent evidence that delegation labels improve outcomes',
+        where_in_doc: 'Triage section; Open questions',
+      }
+    - { id: G4, text: 'AFK definition is our interpretation', where_in_doc: 'Triage section' }
+    - {
+        id: G10,
+        text: 'Story count unresolved (six vs five sections vs 14 rules)',
+        where_in_doc: 'Current state table; kata section',
+      }
+    - {
+        id: T2,
+        text: 'METR study seen only via search metadata, not read in full',
+        where_in_doc: 'Trade-offs (perceived vs measured speed)',
+      }
+    - {
+        id: C4,
+        text: 'CONTEXT.md vs GLOSSARY.md naming drift unverified',
+        where_in_doc: 'Current state table (Glossary row)',
+      }
+    - {
+        id: 'research-F-web',
+        text: "Researcher's verbatim re-verification not independently re-checked (no web access in review)",
+        where_in_doc: 'Quotes limited to 6 short phrases; live URLs not re-requested',
+      }
+
+  gates:
+    type_purity_80: PASS
+    flesch_70_80: PASS (71.2 by orchestrator script after phrase swaps; heuristic, roughly +/-2)
+    spelling_zero: PASS (manual)
+    links_zero_broken: PASS by reading and orchestrator local build; external URLs checked by source only
+    style_95: PASS (manual)
+    diagrams_R1_R12: 'N/A - no diagrams'
+    no_steps_no_exhaustive_reference: PASS
+    no_new_external_claims: "PASS after revision 2 (V1): unmapped sentences (generator vs agent, 'practices again and again', 'size of one issue') were mapped to a source or relabelled as our reading"
+    not_committed: 'files written in worktree; no git commit'
+
+  open_items_for_owner:
+    - 'Flesch: measured 71.2 after orchestrator phrase swaps (was 69.8).'
+    - 'Run a real spell checker if one is available.'
+    - 'Site owner: confirm the trailing-slash form of the site links matches the deployed permalinks.'
+
+documentarist_review:
+  review_id: 'doc_rev_20261122_sf_why_explanation_r1'
+  reviewer: 'nw-documentarist-reviewer (Quill)'
+  date: '2026-11-22'
+  round: 1
+  document: 'site/software-factory/explanation/why-a-software-factory.md'
+  parent_checked: 'site/software-factory/explanation/sf-explanation.md (has_children: true only; git diff confirmed)'
+  evidence_base: 'docs/research/software-factory-for-explanation-doc.md'
+  verdict: NEEDS_REVISION
+  approval_status: rejected_pending_revisions
+  rationale: 'No blocking issue; Explanation classification is correct. One high factual contradiction about this repository (line 49 claims CI runs tests, lint and typecheck; no such workflow exists). Flesch gate not met (estimate 68-69 against 70-80). Several hedges and citations are weaker than the research supports. Matrix: one high, gate failure, no collapse, so NEEDS_REVISION.'
+  typesafe: 'unavailable: TYPESAFE_API_KEY absent in reviewer environment; all judgments made locally, no Jev call'
+  coverage:
+    research_doc: 'examined 290 of 634 lines: Executive Summary, Local Evidence table, F1.1-F5.2, T1-T8, G1-G13, C1-C4, source rows 1-28, citations 1-22. Lines 291-634 not read; no finding in this review relies on them.'
+    repo_files: 'examined AGENTS.md, package.json, tsconfig/vitest not re-read (scripts read via package.json), docs/agents 3 of 3, docs/adr 1 of 1, user-stories.md, site/index.md, site/_config.yml, site/software-factory pages (5 of 5 incl. sf-explanation), site/blog/index.md, .github/workflows 2 of 2 workflow files, .prettierignore, .agents/skills'
+    absent_verified: 'ABSENT-VERIFIED: no src/ directory and no *.test.ts in repo root (ls); no .husky/ directory (ls -la); no CI workflow runs test, lint or typecheck (grep of run: steps in lockfile.yml and pages.yml). Recursive search for test files not run.'
+    not_checked: 'NOT-FOUND-IN-MY-SCOPE: live external URLs (no network); DORA full report; Cusumano texts; GitHub label existence and branch protection (no gh).'
+  classification_review:
+    independent_classification: 'Explanation'
+    accurate: true
+    confidence_appropriate: true
+    match: true
+    issues: []
+  validation_review:
+    complete: false
+    criteria_checked: 'Each validation gate re-checked individually; see gates block. flesch NOT met; no_new_external_claims PARTIAL'
+    issues:
+      - id: V1
+        severity: medium
+        issue: "no_new_external_claims recorded PASS. Unmapped claims: line 52 generator/agent sentence; line 99 'practices again and again'; line 101 'Each story is about the size of one issue'."
+        recommendation: 'Record PARTIAL and map each to a source or mark it as general knowledge or interpretation.'
+      - id: V2
+        severity: medium
+        issue: "claims_to_research_traceability says 'aihero wording not used' for the line 77 criterion. The line 77 phrase 'without judgment, outside access, or manual testing' tracks the aihero same-author wording (research row 16)."
+        recommendation: "Correct the traceability entry and label the sentence as the repo's reading, or cite aihero as the same-author source."
+      - id: V3
+        severity: low
+        issue: 'open_items says run the Jekyll build before merge. The orchestrator already verified the local build. method_note contains a garbled sentence about Prettier.'
+        recommendation: 'Update open_items to reflect the verified build; rewrite method_note.'
+      - id: V4
+        severity: low
+        issue: "spelling 'PASS (manual)' is supported only by reading. No spell tool is installed (aspell and hunspell absent). A token scan against /usr/share/dict found no misspellings among 70 non-dictionary tokens, all inflections, proper nouns or technical terms."
+        recommendation: 'Keep PASS (manual) and add the scan result; run a real spell checker before merge if available.'
+  collapse_detection_review:
+    accurate: true
+    independent_findings: 'none of the five anti-patterns; one reference-creep note on the Current state table (justified context, see issue C1)'
+    false_positives: 0
+    missed_patterns: []
+    issues:
+      - id: C1
+        severity: low
+        issue: 'Current state table (lines 121-131, 202 words) is justified context, not reference creep, because it carries the instruction-versus-enforcement thesis. It repeats prose already in the body on triage labels (line 83), npm run checks (line 93) and CI (line 129).'
+        recommendation: "Keep the table. Remove the repeated prose or trim the table rows to what the argument uses. Keep the status column free of interpretation; mark 'a playful opening rule shows whether an agent read the file' (line 123) as our reading."
+  recommendation_review:
+    quality: medium
+    actionable: true
+    properly_prioritized: true
+    issues:
+      - id: R1
+        severity: low
+        issue: "Writer's open_items are specific and correct, but the Jekyll item is stale (see V3)."
+        improvement: 'Keep Flesch and spelling-tool items first; drop the redundant build item.'
+  quality_score_review:
+    accurate: false
+    issues:
+      - score: 'type_purity 90'
+        issue: 'Recomputed: status table 202 words, further-reading 91, open questions 50, of about 2080 words. Explanation share 83.5% (counting all non-explanation blocks) to 90% (status table only).'
+        correction: 'PASS. Estimate 83-90 percent; state the range.'
+      - score: 'flesch 66-72 (NOT CONFIRMED)'
+        issue: 'Heuristic syllable count (not a validated tool): prose 1719 words, 170 sentences, mean 10.1 words per sentence, FRE about 68.7; all text about 68.0. Heuristic error about plus or minus 2.'
+        correction: 'FAIL against 70-80 until measured with a real Flesch tool. Reduce polysyllabic terms or shorten sentences.'
+  verdict_review:
+    appropriate: true
+    documentarist_verdict: 'writer: classification explanation, clean, all gates PASS except Flesch NOT CONFIRMED'
+    recommended_verdict: NEEDS_REVISION
+    verdict_match: false
+    rationale: "Writer's clean collapse result and PASS on classification are correct. The writer's no_new_external_claims PASS, the Bemer hedge mapping and the CI-free wording are not supported, and the Flesch gate is not met."
+  document_issues:
+    - id: D1
+      severity: high
+      line: 49
+      issue: "Carry-over table, row 'How quality is checked', column 'Agent factory in this repository', says 'Tests, lint, typecheck, CI, and human review'. No workflow runs tests, lint or typecheck (see line 129; lockfile.yml runs only gh actions-lock --verify; pages.yml builds the site). Contradicts the doc's own central gap claim."
+      recommendation: "Replace with: 'Tests, lint and typecheck run through npm run checks, which agents are told to use but nothing enforces; CI builds the site only.'"
+    - id: D2
+      severity: medium
+      line: 47
+      issue: "Row 'Where know-how lives' lists skills as an existing store in this repository. Current state (line 127) says none are checked in; .agents/skills holds only .gitkeep."
+      recommendation: "Write 'AGENTS.md and docs/agents; skills are expected but none are checked in (see Current state).'"
+    - id: D3
+      severity: medium
+      line: 111
+      issue: "Anthropic RCT: 'speed gains may come at the cost of the skills' presupposes a speed gain. Research T1 records speed gain as not significant. Omits a contrary result from the cited study."
+      recommendation: "State that the study found no significant speed gain, then give the 50% versus 67% quiz result and the write-up's caution."
+    - id: D4
+      severity: medium
+      line: 35
+      issue: "Bemer: 'This claim rests on a bibliographic summary' misdescribes the evidence (search-snippet text, research F1.1). 'Treat it as likely' is stronger than the Medium-Low confidence in the research."
+      recommendation: "Say the claim comes from a search snippet of Cusumano's history, not a full reading, and that confidence is low to medium. Drop 'likely'."
+    - id: D5
+      severity: medium
+      line: 77
+      issue: "The criterion 'without judgment, outside access, or manual testing' is the aihero same-author wording (research row 16, not independent), presented without a label as the test for the labels."
+      recommendation: "Label as the repo's reading of the upstream ready-for-agent and ready-for-human definitions, or cite aihero as a same-author source."
+    - id: D6
+      severity: medium
+      line: 'whole page'
+      issue: 'Flesch gate not met. Estimate 68-69 (see quality_score_review).'
+      recommendation: 'Measure with a real tool. Reduce polysyllabic terms (deterministic, probabilistic, progressive disclosure, reproducible) or shorten the longest sentences. Target 70 or more on prose.'
+    - id: D7
+      severity: medium
+      line: '35-111 (multiple)'
+      issue: 'Most external claims in the body have no inline link (Greenfield line 39; Cusumano and Bemer lines 35-37; Anthropic RCT line 111; METR line 112; DORA line 95; Willison 2003 line 99; skills overview line 62; Claude Code guidance line 87). Only some appear in Further reading. A reader cannot trace them.'
+      recommendation: 'Add inline links from research source rows 1, 9, 12, 13, 18, 23, 25, 28 and the Cusumano MIT DSpace record, or add a Sources subsection.'
+    - id: D8
+      severity: low
+      line: 52
+      issue: "'A generator gives the same output for the same input. An agent does not.' is general knowledge with no research support."
+      recommendation: "Accept as general knowledge, or cite Greenfield's packaging point (line 39) for the contrast."
+    - id: D9
+      severity: low
+      line: 99
+      issue: "'A kata is a small exercise that a person practices again and again.' Sits before the Willison 2003 link, which says 'interesting thought exercise'. 'practices again and again' comes only from off-list InfoQ."
+      recommendation: "Use Willison's wording, or attribute the practice framing to InfoQ."
+    - id: D10
+      severity: low
+      line: 101
+      issue: "'Each story is about the size of one issue' is stated as fact. Research F5.2 gives it as interpretation."
+      recommendation: "Write 'is meant to be roughly the size of one issue'."
+    - id: D11
+      severity: low
+      line: 62
+      issue: "'The Claude documentation calls this progressive disclosure.' The term appears in the research F2.2 heading. The fetched text was not re-checked in this review."
+      recommendation: 'Confirm the term appears in the Agent Skills overview before merge, or rephrase.'
+    - id: D12
+      severity: low
+      line: 89
+      issue: "'Anthropic's guidance separates instructions ... from hooks and CI' is sourced to Claude Code best practices (research F4.2)."
+      recommendation: "Write 'Claude Code guidance'."
+    - id: D13
+      severity: low
+      line: 113
+      issue: "'Review can then limit the whole factory' extends Morris's point. Research T3 supports only the bottleneck claim."
+      recommendation: 'Attribute the bottleneck to Morris and keep the extension as our reading.'
+  gates:
+    classification_explanation: PASS
+    type_purity_80: 'PASS (estimate 83-90 percent)'
+    flesch_70_80: 'FAIL (heuristic estimate 68-69; must be measured with a real tool)'
+    spelling_zero: 'PASS (manual token scan; no spell tool installed)'
+    links_internal_zero_broken: 'PASS (9 internal site links and 2 repo-file links resolved on disk; kramdown anchor slug matches heading)'
+    links_external: 'NOT VERIFIED (no network); marked checked-by-source only'
+    style_95: 'PASS (front matter keys, heading and Kramdown attribute patterns match sf-explanation.md, sf-tutorial.md and index.md; grand_parent is correct for depth-3 nesting)'
+    no_emoji_non_ascii: 'PASS (grep found no non-ASCII characters)'
+    diagrams: 'N/A (none present)'
+    no_steps_no_exhaustive_reference: 'PASS (no numbered procedures or command walkthroughs; status table is bounded)'
+    no_new_external_claims: 'PARTIAL (see V1 and D8-D10)'
+    jev: 'unavailable (TYPESAFE_API_KEY absent)'
+  scores:
+    assessment_quality: medium
+    classification_accuracy: high
+    validation_completeness: medium
+    collapse_detection_correctness: high
+    recommendation_quality: medium
+  overall_assessment:
+    approval_status: rejected_pending_revisions
+    issue_summary:
+      blocking: 0
+      high: 1
+      medium: 8
+      low: 10
+    blocking_issues: []
+    recommendations:
+      - priority: 1
+        action: 'Fix D1 (line 49 CI claim) and D2 (line 47 skills cell).'
+      - priority: 2
+        action: 'Run a real Flesch measurement on the prose and bring it to 70 or more (D6).'
+      - priority: 3
+        action: 'Correct D3 (speed gain) and D4 (Bemer evidence and hedge), and label D5 (criterion wording).'
+      - priority: 4
+        action: 'Add inline links for external claims (D7).'
+      - priority: 5
+        action: 'Correct validation entries V1 and V2; keep the verdict NEEDS_REVISION until a re-review.'
+    review_cycle: 1
+    escalation: 'not required (round 1 of 2)'
+
+documentarist_review_r2:
+  review_id: 'doc_rev_20261122_sf_why_explanation_r2'
+  reviewer: 'nw-documentarist-reviewer (Quill)'
+  date: '2026-11-22'
+  round: 2
+  document: 'site/software-factory/explanation/why-a-software-factory.md'
+  evidence_base: 'docs/research/software-factory-for-explanation-doc.md'
+  verdict: NEEDS_REVISION
+  approval_status: rejected_pending_revisions
+  rationale: "Round-1 items D1-D13, C1, V1-V3 are resolved or resolved in part. No blocking-severity defect. Three must-fix items keep this from APPROVED: Flesch 69.8 is below the 70 gate; line 139 overstates the research; 'planned' skills status (lines 49, 129) has no source. A round-3 check is needed after these fixes."
+  typesafe: 'unavailable: TYPESAFE_API_KEY absent; all judgments local'
+  round1_resolution:
+    D1_line49_CI_claim: 'resolved (line 51 now says npm run checks is instructed, CI builds site)'
+    D2_line47_skills_cell: "resolved in part (line 49 fixed; see new item N2 on 'planned')"
+    D3_line111_speed_gain: "resolved (line 113: 'no significant speed gain')"
+    D4_line35_bemer_evidence_hedge: "resolved (line 35-37: search snippet, medium-low, 'lead not a settled fact')"
+    D5_line77_criterion_label: "resolved (line 79 labelled 'In our reading')"
+    D6_flesch: 'NOT resolved (see F1)'
+    D7_inline_links: 'resolved; all 13 external URLs in the doc match research source table URLs (checked one by one)'
+    D8_generator_sentence: 'unchanged (line 54 general knowledge, still uncited); accepted as Low'
+    D9_kata_definition: 'resolved (line 101 uses Willison wording)'
+    D10_size_claim: "resolved for size (line 103); 'a failure is more likely caused by the process' still stated as fact (see N4)"
+    D11_progressive_disclosure: 'resolved (line 64 wording matches research F2.2 description)'
+    D12_guidance_attribution: "resolved (line 91 'the same guidance')"
+    D13_morris_extension: "resolved (line 115 'In our reading')"
+    C1_status_table_repetition: 'resolved in part (table cells shortened; prose at lines 85, 95 still repeats; Low)'
+    V1_no_new_external_claims: 'resolved (writer marks PASS after mapping)'
+    V2_aihero_traceability: "resolved (writer's claims_to_research_traceability now labels line 77 as our reading)"
+    V3_stale_items: "resolved in part: method_note rewritten; line 21 and 148 still say Flesch 'not measured' (see V-A)"
+  findings:
+    - id: F1
+      severity: medium
+      gate: 'flesch_70_80'
+      line: 'whole page'
+      issue: "Orchestrator measured Flesch 69.8 (prose). My independent run of the same heuristic gives 70.0 on prose (1672 words, 189 sentences, 8.8 words per sentence) and 69.2 on all text. The lower bound is 70, so the gate is not met on the stricter count and only just met on mine. Two sentences are 24 and 26 words long: line 27 ('It includes the skills an agent can load...') and line 79 ('In our reading, an issue is ready for an agent when it is specified well enough...')."
+      recommendation: "Split line 79 into two sentences (for example, after 'judgment calls'). Split line 27 at 'the issue queue it takes work from'. Re-measure with the orchestrator's script and with the same heuristic; require 70.5 or higher on both to leave margin."
+    - id: N2
+      severity: medium
+      gate: 'none'
+      line: '49 and 129'
+      issue: "'Skills are planned; none are checked in yet' (line 49) and 'Planned; none checked in' (line 129). Research gives no evidence of a plan for skills; F2.2 and G12 say only that skills are not checked in and that their location was not verified."
+      recommendation: "Write 'none checked in; their location was not verified' in both places."
+    - id: N3
+      severity: medium
+      gate: 'none'
+      line: 139
+      issue: "'No independent evidence exists yet.' is stronger than the research. G5 says none was found in the search. Absence in a search is not proof of absence."
+      recommendation: "Write 'We found no independent evidence so far.'"
+    - id: N4
+      severity: low
+      gate: 'none'
+      line: 103
+      issue: "'The domain is small and well known. So a failure is more likely caused by the process than by the domain.' This is design reasoning presented as fact. Research F5.2 labels it interpretation."
+      recommendation: "Add 'In our reading' before the second sentence."
+    - id: N5
+      severity: low
+      gate: 'none'
+      line: 114
+      issue: "METR: 'found that AI tools slowed them down' drops the early-2025 scope in T2 and the 19% and 20% figures. The search-summary caveat is present, so the claim is hedged."
+      recommendation: "Write 'early-2025 AI tools' and keep the caveat."
+    - id: N6
+      severity: low
+      gate: 'none'
+      line: 39
+      issue: "'It covers process discipline and quality control' is from catalog and review abstracts, not the book (research F1.2)."
+      recommendation: "Add 'according to catalog descriptions' or 'as the catalog describes it'."
+    - id: N7
+      severity: low
+      gate: 'none'
+      line: '54 and 101'
+      issue: "Uncited general claims ('A generator is deterministic. An agent is not.'; 'A kata is a small programming exercise'). Acceptable as general knowledge."
+      recommendation: 'Leave as is, or cite the research source. No change required for approval.'
+    - id: V-A
+      severity: low
+      gate: 'validation'
+      line: 'validation_report.gates.flesch_70_80 (line 148) and readability (line 21)'
+      issue: "Still say 'not measured in revision 2'. The orchestrator measured 69.8 and this review measured 70.0 by heuristic."
+      recommendation: 'Record the measured values, the tool used and the result after the Flesch fix.'
+  coverage:
+    doc_links: 'all 13 external URLs compared to research source table: 13 of 13 found in research'
+    internal_links: 'examined by the orchestrator build; site/software-factory/tutorial/sf-tutorial.md, how-to, reference and blog index exist (reviewer re-checked file list, not a build)'
+    yaml: 'validation file parses in Ruby Psych as a whole (documentarist_review and documentarist_review_r2 keys present)'
+    spelling: 'token scan against /usr/share/dict: 68 non-dictionary tokens, all inflections, proper names or technical terms; no misspelling found. No spell tool installed.'
+    non_ascii: 'none in doc'
+    not_checked: 'live external URLs (no network); research lines 291-634 (not read in round 1 either)'
+  gates:
+    classification_explanation: PASS
+    type_purity_80: 'PASS (tables 11.5% of all words; plus further reading and open questions, purity about 83-89 percent)'
+    flesch_70_80: 'FAIL by 0.2 on orchestrator measure (69.8); reviewer heuristic 70.0 on prose. Fix F1 and re-measure.'
+    spelling_zero: 'PASS (manual token scan)'
+    links_internal_zero_broken: 'PASS (orchestrator build; reviewer file-existence check)'
+    links_external_in_research: 'PASS (13 of 13 URLs in research source table)'
+    style_95: 'PASS (no change from round 1)'
+    no_new_external_claims: 'PASS for claims with URLs; N2, N3, N4 and N5 are stronger than or unmapped to research'
+  scores:
+    assessment_quality: high
+    classification_accuracy: high
+    validation_completeness: medium
+    collapse_detection_correctness: high
+    recommendation_quality: high
+  overall_assessment:
+    approval_status: rejected_pending_revisions
+    issue_summary:
+      blocking: 0
+      high: 0
+      medium: 3
+      low: 4
+    blocking_issues: []
+    must_fix_before_approval:
+      - 'F1: Flesch to 70.5 or higher on re-measure (split line 79 and line 27).'
+      - "N2: remove 'planned' for skills (lines 49, 129)."
+      - "N3: replace 'No independent evidence exists yet' (line 139)."
+    review_cycle: 2
+    escalation: 'not required (round 2 of 2 allowed; if round 3 is needed, escalate to human per limit)'
+
+documentarist_review_r3:
+  review_id: 'doc_rev_20261122_sf_why_explanation_r3'
+  reviewer: 'nw-documentarist-reviewer (Quill)'
+  date: '2026-11-22'
+  round: 3
+  document: 'site/software-factory/explanation/why-a-software-factory.md'
+  verdict: APPROVED
+  approval_status: approved
+  rationale: 'F1, N2 and N3 from round 2 are resolved. Flesch measured 71.2 by orchestrator script and 71.4 prose by reviewer heuristic, both within 70-80. The six phrase swaps keep their claims. The source-linked claims were checked against the research and match. No blocking or high items.'
+  typesafe: 'unavailable: TYPESAFE_API_KEY absent; all judgments local'
+  resolutions:
+    F1_flesch: 'resolved: 71.2 (orchestrator) and 71.4 prose (reviewer heuristic, roughly +/-2)'
+    N2_planned_skills: "resolved: lines 49 and 129 now read 'none checked in; location not verified'"
+    N3_no_independent_evidence: "resolved: line 139 reads 'We found no independent evidence so far.'"
+    N4_failure_reasoning: "resolved: line 103 'In our reading'"
+    N5_metr_scope: "resolved: line 114 'early-2025 AI tools'"
+    N6_cusumano_content: "resolved: line 39 'We know its content only from catalog abstracts and reviews'"
+    V-A_validation_flesch_status: 'resolved: validation line 148 records 71.2 PASS'
+  phrase_swaps_checked:
+    - {
+        line: 54,
+        change: "'A generator is deterministic' to 'gives the same output for the same input'",
+        claim_preserved: true,
+      }
+    - {
+        line: 83,
+        change: "'Autonomy can also compound errors' to 'When an agent works alone, small errors can pile up'",
+        claim_preserved: true,
+        note: "close paraphrase of research F3.2 'potential for compounding errors'; stays within the source",
+      }
+    - {
+        line: 35,
+        change: "'reduce variation in programmer productivity' to 'make output less uneven from one programmer to the next'",
+        claim_preserved: true,
+      }
+    - {
+        line: 91,
+        change: "'Instructions are not enforcement' to 'Instructions do not force anything'",
+        claim_preserved: true,
+      }
+    - {
+        line: 79,
+        change: "'without judgment calls' split into two sentences, 'finish alone'",
+        claim_preserved: true,
+      }
+  gates:
+    classification_explanation: PASS
+    type_purity_80: PASS
+    flesch_70_80: 'PASS (71.2 orchestrator; 71.4 reviewer heuristic)'
+    spelling_zero: 'PASS (manual; no non-ASCII; no spell tool installed)'
+    links_internal_zero_broken: 'PASS (orchestrator build)'
+    links_external_in_research: 'PASS (13 of 13)'
+    style_95: PASS
+    no_new_external_claims: PASS
+  overall_assessment:
+    approval_status: approved
+    issue_summary:
+      blocking: 0
+      high: 0
+      medium: 0
+      low: 0
+    blocking_issues: []
+    not_checked: 'live external URLs (no network); research lines 291-634'
+    review_cycle: 3
+    escalation: 'not required'
