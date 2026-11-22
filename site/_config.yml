@@ -1,0 +1,72 @@
+title: RPG Combat Software Factory
+description: A TypeScript implementation of the RPG Combat kata, built by an agent-driven software factory of coding agents, skills, and workflows
+theme: just-the-docs
+
+url: https://ibanfr.github.io
+baseurl: /rpg-combat-software-factory
+repository: https://github.com/ibanFR/rpg-combat-software-factory
+
+# Note: just-the-docs renders aux_links hrefs verbatim (no relative_url filter),
+# so the Blog link must include the baseurl to resolve under project pages.
+aux_links:
+  Blog: /rpg-combat-software-factory/blog/
+  Iván Fernández: https://ibanfr.github.io/
+  View on GitHub: https://github.com/ibanFR/rpg-combat-software-factory
+
+aux_links_new_tab: false
+back_to_top: true
+back_to_top_text: "Back to top"
+
+# Rendered by _includes/footer_custom.html at the bottom of every page.
+footer_content: "Iván Fernández. All rights reserved."
+
+# Footer "Edit this page on GitHub" link
+gh_edit_link: true
+gh_edit_link_text: "Edit this page on GitHub."
+gh_edit_repository: "https://github.com/ibanFR/rpg-combat-software-factory"
+gh_edit_branch: "main"
+gh_edit_source: site
+gh_edit_view_mode: "tree"
+
+callouts:
+  warning:
+    title: Warning
+    color: red
+
+permalink: /blog/:year/:month/:day/:title/
+
+plugins:
+  - jekyll-archives
+
+jekyll-archives:
+  enabled:
+    - tags
+    - categories
+  layouts:
+    tag: archive
+    category: archive
+  permalinks:
+    tag: /blog/tag/:name/
+    category: /blog/category/:name/
+
+# Jekyll 4 merges this list with its default excludes (Gemfile, Gemfile.lock,
+# vendor/, node_modules/, ...), so only site-specific files go here.
+exclude:
+  - start_local_server.sh
+
+# Documentation sections are plain page directories under site/. Navigation is
+# built from each page's front matter (title / parent / grand_parent /
+# nav_order / has_children) rather than from Jekyll collections.
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: default
+
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: post
+      nav_exclude: true

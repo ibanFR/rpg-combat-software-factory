@@ -1,0 +1,51 @@
+# Fails when .github/workflows/actions.lock is out of sync with the workflows
+# or a locked pin no longer verifies upstream. Required status check on main.
+#
+# No path filter on purpose: a required check skipped by a path filter never
+# reports, which would block unrelated pull requests.
+
+name: actions-lock
+
+on:
+  pull_request:
+  push:
+    branches: ['main']
+
+permissions:
+  contents: read
+
+jobs:
+  verify-actions-lock:
+    name: verify-actions-lock
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6.1.0
+        with:
+          persist-credentials: false
+
+      - name: Install gh-actions-lock
+        run: gh extension install github/gh-actions-lock --pin v0.5.1
+
+      - name: Verify lockfile
+        run: gh actions-lock --verify
+
+      - name: Explain how to fix
+        if: failure()
+        run: |
+          cat >> "$GITHUB_STEP_SUMMARY" <<'EOF'
+          ## actions.lock is out of sync
+
+          Regenerate the lockfile locally and commit it together with the workflow changes:
+
+          ```bash
+          gh extension install github/gh-actions-lock --pin v0.5.1
+          gh actions-lock
+          git add .github/workflows/
+          git commit -m "Update actions.lock"
+          ```
+
+          See https://gh.io/actions-lockfile
+          EOF

@@ -1,0 +1,67 @@
+---
+layout: default
+---
+
+<div class="blog-index">
+  <h1>Blog</h1>
+  <p>Engineering notes, updates, and announcements from the RPG Combat Software Factory.</p>
+
+  {% comment %}
+    site.tags / site.categories map each name to its posts, so untagged posts
+    contribute nothing and names containing commas stay intact. `sort` turns
+    the map into [name, posts] pairs ordered by name.
+  {% endcomment %}
+  {% assign all_tags = site.tags | sort %}
+  {% assign all_categories = site.categories | sort %}
+
+  {% if all_categories.size > 0 or all_tags.size > 0 %}
+  <div class="taxonomy-section">
+    {% if all_categories.size > 0 %}
+    <div class="taxonomy-group">
+      <span class="taxonomy-label">Categories:</span>
+      {% for category in all_categories %}
+        <a href="{{ site.baseurl }}/blog/category/{{ category[0] | slugify }}/" class="chip chip-category">
+          {{ category[0] }} <span class="chip-count">{{ category[1].size }}</span>
+        </a>
+      {% endfor %}
+    </div>
+    {% endif %}
+    {% if all_tags.size > 0 %}
+    <div class="taxonomy-group">
+      <span class="taxonomy-label">Tags:</span>
+      {% for tag in all_tags %}
+        <a href="{{ site.baseurl }}/blog/tag/{{ tag[0] | slugify }}/" class="chip chip-tag">
+          #{{ tag[0] }} <span class="chip-count">{{ tag[1].size }}</span>
+        </a>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+  {% endif %}
+
+  {% if site.posts.size == 0 %}
+    <p>No posts yet.</p>
+  {% else %}
+    <ul class="post-list">
+      {% for post in site.posts %}
+        <li class="post-item">
+          <time class="post-date" datetime="{{ post.date | date_to_xmlschema }}">
+            {{ post.date | date: "%B %-d, %Y" }}
+          </time>
+          <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
+          {% if post.excerpt %}
+            <p class="post-excerpt">{{ post.excerpt | strip_html | truncatewords: 30 }}</p>
+          {% endif %}
+          <div class="post-chips">
+            {% for cat in post.categories %}
+              <a href="{{ site.baseurl }}/blog/category/{{ cat | slugify }}/" class="chip chip-category">{{ cat }}</a>
+            {% endfor %}
+            {% for tag in post.tags %}
+              <a href="{{ site.baseurl }}/blog/tag/{{ tag | slugify }}/" class="chip chip-tag">#{{ tag }}</a>
+            {% endfor %}
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+</div>
