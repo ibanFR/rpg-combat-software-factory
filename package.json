@@ -10,7 +10,8 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
-    "checks": "npm run format:fix && npm run lint:fix && npm run typecheck && npm test"
+    "checks": "npm run format:fix && npm run lint:fix && npm run typecheck && npm test",
+    "acceptance": "cucumber-js"
   },
   "keywords": [
     "kata"
@@ -19,6 +20,7 @@
   "license": "MIT",
   "description": "A TypeScript implementation of RPG Combat",
   "devDependencies": {
+    "@cucumber/cucumber": "^13.3.0",
     "@eslint/js": "^10.0.1",
     "@types/node": "^25.9.1",
     "eslint": "^10.4.1",
