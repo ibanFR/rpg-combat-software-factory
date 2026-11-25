@@ -6,7 +6,8 @@
 # CONTEXT.md lives at the repository root, outside the Jekyll source, so it is
 # read relative to site.source. `jekyll serve` does not watch it: restart the
 # server after editing terms.
-require "cgi"
+require "cgi/escape"
+require "set"
 
 module ContextGlossary
   CONTEXT_FILE = "../CONTEXT.md"
@@ -21,11 +22,17 @@ module ContextGlossary
     body = lines[(start + 1)..].take_while { |line| !line.start_with?("## ", "### ") }
     terms = []
     body.each do |line|
-      if (match = line.match(/\A\*\*(.+)\*\*:\s*\z/))
-        terms << Term.new(match[1], +"", nil)
-      elsif (match = line.match(/\A_Avoid_:\s*(.+)\z/))
-        terms.last.avoid = match[1] if terms.last
-      elsif !line.strip.empty? && terms.last
+      next if line.strip.empty?
+
+      if (match = line.match(/\A\*\*(.+?)\*\*:\s*(.*)\z/))
+        terms << Term.new(match[1], +match[2], nil)
+        next
+      end
+      raise ArgumentError, "context_glossary: text before the first term in group '#{group}': #{line}" unless terms.last
+
+      if (match = line.match(/\A_Avoid_:\s*(.+)\z/))
+        terms.last.avoid = match[1]
+      else
         terms.last.definition << " " unless terms.last.definition.empty?
         terms.last.definition << line.strip
       end
@@ -34,11 +41,17 @@ module ContextGlossary
   end
 
   def self.slug(name)
-    name.downcase.gsub(/[^a-z0-9]+/, "-").gsub(/\A-|-\z/, "")
+    name.downcase.gsub(/[^\p{L}\p{N}]+/, "-").gsub(/\A-|-\z/, "")
   end
 
-  def self.inline(text)
-    Kramdown::Document.new(text).to_html.strip.sub(/\A<p>/, "").sub(%r{</p>\z}, "")
+  # Renders Markdown with the site's own converter (GFM and the site's kramdown
+  # settings) and returns the inner HTML of the single paragraph it produces.
+  def self.inline(site, text)
+    html = site.find_converter_instance(Jekyll::Converters::Markdown).convert(text).strip
+    match = html.match(%r{\A<p>(.*)</p>\z}m)
+    raise ArgumentError, "context_glossary: '#{text}' must render as a single paragraph" if match.nil? || match[1].include?("<p>")
+
+    match[1]
   end
 
   class Tag < Liquid::Tag
@@ -52,12 +65,19 @@ module ContextGlossary
       path = File.expand_path(CONTEXT_FILE, site.source)
       terms = ContextGlossary.parse_group(File.read(path), @group)
 
+      # Ids already taken on the page by its Markdown headings.
+      page_content = context.registers[:page]&.[]("content").to_s
+      used = page_content.lines.filter_map { |line| line[/\A#+\s+(.+)/, 1] }.map { |heading| ContextGlossary.slug(heading) }.to_set
+
       items = terms.map do |term|
-        avoid = term.avoid ? %(\n  <p class="text-grey-dk-000 fs-2">Avoid: #{CGI.escapeHTML(term.avoid)}</p>) : ""
+        id = ContextGlossary.slug(term.name)
+        raise ArgumentError, "context_glossary: term '#{term.name}' has an empty or duplicate anchor id '#{id}'" if id.empty? || !used.add?(id)
+
+        avoid = term.avoid ? %(\n  <p class="text-grey-dk-000 fs-2">Avoid: #{ContextGlossary.inline(site, term.avoid)}</p>) : ""
         <<~HTML.chomp
-          <dt id="#{ContextGlossary.slug(term.name)}">#{CGI.escapeHTML(term.name)}</dt>
+          <dt id="#{CGI.escapeHTML(id)}">#{ContextGlossary.inline(site, term.name)}</dt>
           <dd>
-            <p>#{ContextGlossary.inline(term.definition)}</p>#{avoid}
+            <p>#{ContextGlossary.inline(site, term.definition)}</p>#{avoid}
           </dd>
         HTML
       end
