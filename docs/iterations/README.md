@@ -7,7 +7,7 @@ This directory holds local iteration plans for the RPG Combat repo.
 1. **Plan** — ask Claude Code to use the `iteration-planning` skill.
    - Output: `docs/iterations/NNN-topic/plan.md` and `todo.md`.
    - Validation: local multi-agent plan review (`claude`, `gemini`, `copilot`), synthesized by Claude Code.
-2. **Implement** — ask Claude Code to use the `iteration-implementation` skill with the plan path.
+2. **Implement** — run `bin/ralph` (one todo per run, loops while todos remain; `bin/ralph.test.sh` checks its stop/continue protocol), or ask Claude Code to use the `iteration-implementation` skill with the plan path.
    - Each run implements the first unchecked `todo.md` item only.
    - Each completed item is validated and checked off.
 3. **Review/refactor** — ask Claude Code to use the `iteration-review` skill.
