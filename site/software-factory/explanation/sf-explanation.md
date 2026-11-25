@@ -3,6 +3,7 @@ title: Explanation
 layout: default
 parent: Software Factory
 nav_order: 4
+has_children: true
 ---
 
 # Software Factory Explanation

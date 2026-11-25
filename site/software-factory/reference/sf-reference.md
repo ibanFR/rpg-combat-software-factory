@@ -3,6 +3,7 @@ title: Reference
 layout: default
 parent: Software Factory
 nav_order: 3
+has_children: true
 ---
 
 # Software Factory Reference
