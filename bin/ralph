@@ -14,6 +14,11 @@ ALLOWED_TOOLS=(
   "Bash(git status*)" "Bash(git diff*)"
 )
 
+# superpowers is enabled for the project only so the Operator's kaizen-fix
+# can use superpowers:systematic-debugging. Its SessionStart hook would
+# change Ralph's behaviour, so Ralph runs turn it off (docs/adr/0002).
+RALPH_SETTINGS='{"enabledPlugins":{"superpowers@claude-plugins-official":false}}'
+
 agent_pid=""
 
 cleanup() {
@@ -47,7 +52,7 @@ while true; do
   rm -f "$CONTINUE_FILE"
 
   echo "==== starting iteration ===="
-  claude -p --allowedTools "${ALLOWED_TOOLS[@]}" < "$PROMPT_FILE" &
+  claude -p --settings "$RALPH_SETTINGS" --allowedTools "${ALLOWED_TOOLS[@]}" < "$PROMPT_FILE" &
   agent_pid=$!
   set +e
   wait "$agent_pid"

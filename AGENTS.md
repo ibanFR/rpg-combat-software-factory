@@ -4,6 +4,13 @@
 
 An implementation of the RPG Combat rules engine. There are six user stories described in [user-stories.md](user-stories.md)
 
+## Product vs factory work
+
+- Product behaviour work for RPG Combat belongs in `docs/iterations/`.
+- Factory/workflow/tooling problems belong in `docs/kaizen/`.
+- Do not create product iteration plans for Ralph loop scripts/prompts, Claude skills/prompts, planning/review handoffs, validation, or process improvements.
+- If factory friction is noticed during product work, capture it as a Kaizen note (`kaizen-note` skill) instead of folding it into the product iteration.
+
 ## Build and Test Scripts
 
 - `npm test`: runs unit tests using vitest

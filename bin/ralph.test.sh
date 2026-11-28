@@ -38,4 +38,7 @@ run_case "continues once when the first run signals, then stops" \
 run_case "stops and passes through a non-zero exit" \
   'echo "more todos" > .ralph/continue; exit 3' 3 1
 
+run_case "turns the superpowers plugin off for its runs" \
+  '[[ "$*" == *"\"superpowers@claude-plugins-official\":false"* ]] || exit 4; exit 0' 0 1
+
 exit "$failures"

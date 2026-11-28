@@ -25,7 +25,9 @@ Loop protocol:
 Kaizen protocol:
 
 - If you notice friction in this Ralph loop, planning/review handoffs, prompts, skills, validation, recovery, or other factory machinery, do not fold it into the product iteration.
-- Capture it as a factual note under `docs/kaizen/YYYY-MM-DD-short-slug.md` when Ivan has asked for Kaizen capture or when continuing without capture would lose important evidence.
+- Never write a Kaizen note yourself; Ivan records them with the `kaizen-note` skill.
+- If the friction blocks the current todo, stop without writing `.ralph/continue`. Otherwise finish the todo.
+- Either way, end your report with a `Factory friction:` section stating what you expected, what happened, and the exact commands and error text, so Ivan can record the note.
 - Keep product code fixes and factory fixes separate.
 
 Quality bar:
