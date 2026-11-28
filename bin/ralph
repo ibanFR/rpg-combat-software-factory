@@ -14,15 +14,21 @@ ALLOWED_TOOLS=(
   "Bash(git status*)" "Bash(git diff*)"
 )
 
+agent_pid=""
+
 cleanup() {
+  trap - SIGINT SIGTERM
   echo ""
   echo "==== shutting down ===="
-  kill 0
-  wait
-  exit 0
+  if [[ -n "$agent_pid" ]]; then
+    kill "$agent_pid" 2>/dev/null || true
+    wait "$agent_pid" 2>/dev/null || true
+  fi
+  exit "$1"
 }
 
-trap cleanup SIGINT SIGTERM
+trap 'cleanup 130' SIGINT
+trap 'cleanup 143' SIGTERM
 
 if ! command -v claude >/dev/null 2>&1; then
   echo "error: claude CLI not found on PATH" >&2
