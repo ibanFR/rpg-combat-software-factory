@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-# Ralph loop: run Claude Code on prompt.md, one todo per run.
+# Ralph loop: run Claude Code on prompts/ralph.md, one todo per run.
 # Starts another run only when the last one wrote .ralph/continue.
 set -euo pipefail
 
-PROMPT_FILE="${1:-prompt.md}"
+PROMPT_FILE="${1:-prompts/ralph.md}"
 STATE_DIR=".ralph"
 CONTINUE_FILE="$STATE_DIR/continue"
 
