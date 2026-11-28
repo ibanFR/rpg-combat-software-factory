@@ -35,15 +35,22 @@ A refactoring review run by several different coding agents at the end of an ite
 _Avoid_: Mob review, multi-agent review
 
 **Kaizen note**:
-A recorded observation of friction in the factory itself (workflow, tooling, prompts) together with its fix, kept apart from product work.
+A recorded observation of friction in the factory itself (workflow, tooling, prompts), kept apart from product work. It records the problem, not the fix; it stays open until it gains a **Resolution**.
 _Avoid_: Retro note, improvement log
+
+**Resolution**:
+The applied fix appended to a **Kaizen note**: root cause, what changed, and how it was validated. Fix options still awaiting a decision are not a Resolution.
+_Avoid_: Fix note, outcome
 
 ## Relationships
 
 - An **Iteration** has one or more **Todos**; one **Ralph loop** run completes at most one **Todo**
 - The **Operator** approves an **Iteration** plan before the **Ralph loop** runs it
-- A **Kaizen note** changes the factory, never product behaviour; an **Iteration** changes product behaviour, never the factory
+- A **Resolution** changes the factory, never product behaviour; an **Iteration** changes product behaviour, never the factory
+- A **Kaizen note** has at most one **Resolution**
+- The **Operator** records **Kaizen notes**; the **Ralph loop** reports friction and stops, but never writes a **Kaizen note**
 
 ## Flagged ambiguities
 
 - "Wave" belongs to nWave, which this repo uses only for Diataxis documentation; it is not an **Iteration**.
+- **Kaizen note** used to mean "observation together with its fix". Resolved: the note is the observation only; the fix is its **Resolution**, added later.

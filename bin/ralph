@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-# Ralph loop: run Claude Code on prompt.md, one todo per run.
+# Ralph loop: run Claude Code on prompts/ralph.md, one todo per run.
 # Starts another run only when the last one wrote .ralph/continue.
 set -euo pipefail
 
-PROMPT_FILE="${1:-prompt.md}"
+PROMPT_FILE="${1:-prompts/ralph.md}"
 STATE_DIR=".ralph"
 CONTINUE_FILE="$STATE_DIR/continue"
 
@@ -13,6 +13,11 @@ ALLOWED_TOOLS=(
   "Bash(npm run *)" "Bash(npm test*)" "Bash(npx vitest *)" "Bash(npx tsc *)"
   "Bash(git status*)" "Bash(git diff*)"
 )
+
+# superpowers is enabled for the project only so the Operator's kaizen-fix
+# can use superpowers:systematic-debugging. Its SessionStart hook would
+# change Ralph's behaviour, so Ralph runs turn it off (docs/adr/0002).
+RALPH_SETTINGS='{"enabledPlugins":{"superpowers@claude-plugins-official":false}}'
 
 agent_pid=""
 
@@ -47,7 +52,7 @@ while true; do
   rm -f "$CONTINUE_FILE"
 
   echo "==== starting iteration ===="
-  claude -p --allowedTools "${ALLOWED_TOOLS[@]}" < "$PROMPT_FILE" &
+  claude -p --settings "$RALPH_SETTINGS" --allowedTools "${ALLOWED_TOOLS[@]}" < "$PROMPT_FILE" &
   agent_pid=$!
   set +e
   wait "$agent_pid"

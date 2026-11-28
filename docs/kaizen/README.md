@@ -1,39 +1,7 @@
 # Kaizen notes
 
-A **Kaizen note** (see `CONTEXT.md`) records friction in the factory itself — the Ralph loop, prompts, skills, validation, handoffs — together with its fix. Product behaviour never changes here; that belongs in `docs/iterations/`.
+A **Kaizen note** (see `CONTEXT.md`) records friction in the factory itself: the Ralph loop, prompts, skills, validation, handoffs. It records the problem, not the fix; it stays open until it gains a **Resolution**. Product behaviour never changes here; that belongs in `docs/iterations/`.
 
-## When to write one
-
-When the factory gets in the way: a loop that spins or stops wrongly, a prompt an agent misreads, a review tool that fails, a handoff that loses information. Write it while the evidence is fresh.
-
-## Format
-
-File name: `YYYY-MM-DD-short-slug.md`.
-
-```markdown
-# Problem: <one line>
-
-Date: YYYY-MM-DD
-
-## Context
-
-## Expected standard
-
-## What happened
-
-## Impact
-
-## What allowed it to happen
-
-## Open questions
-
-## Possible prevention ideas
-
-## Resolution applied
-
-Root cause, fix applied, and how the fix was validated (prefer a committed, rerunnable check over a one-off manual run).
-```
-
-## Index
-
-_No notes yet._
+- Record a note with the `kaizen-note` skill (`.claude/skills/kaizen-note/`). It holds the note template.
+- Resolve a note with the `kaizen-fix` skill (`.claude/skills/kaizen-fix/`). It appends the `## Resolution` section.
+- The Ralph loop never writes notes. It reports factory friction in its run output, and the Operator records it.
